@@ -36,7 +36,7 @@ public class BootStrapData implements CommandLineRunner {
         publisher.setState("FL");
 
         publisherRepository.save(publisher);
-
+        System.out.println("Publisher Count: " + publisherRepository.count());
 
 
 
@@ -44,13 +44,20 @@ public class BootStrapData implements CommandLineRunner {
         Book ddd = new Book("Domain Driven Design","132465798");
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
-        authorRepository.save(eric);
-        bookRepository.save(ddd);
-
 
         ddd.setPublisher(publisher);
         publisher.getBooks().add(ddd);
 
+        authorRepository.save(eric);
+        bookRepository.save(ddd);
+        publisherRepository.save(publisher);
+
+        //print text in red background
+        System.out.println("\u001B[41m" + "The background color is red" + "\u001B[0m");
+
+
+
+        System.out.println("Publisher Count: " + publisherRepository.count());
 
 
         Author rod = new Author("Rod", "Johnson");
@@ -59,10 +66,11 @@ public class BootStrapData implements CommandLineRunner {
         noEjb.getAuthors().add(rod);
         noEjb.setPublisher(publisher);
         publisher.getBooks().add(noEjb);
+
         authorRepository.save(rod);
         bookRepository.save(noEjb);
         publisherRepository.save(publisher);
-
+        System.out.println("Publisher Count: " + publisherRepository.count());
 
         System.out.println("Number of books: " + bookRepository.count());
         System.out.println("Publisher Number of Books: " + publisher.getBooks().size());
